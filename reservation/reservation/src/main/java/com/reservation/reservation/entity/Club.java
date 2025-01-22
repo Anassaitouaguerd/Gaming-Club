@@ -21,8 +21,7 @@ public class Club {
     private String description;
     private String contactInfo;
 
-//    @ManyToOne
-//    private User admin;  // The admin who owns/manages this club
+    private Long admin;  // The admin who owns/manages this club
 
     @OneToMany(mappedBy = "club")
     private List<Resource> resources;

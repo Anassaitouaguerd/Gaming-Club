@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.4.1</version>
 		<relativePath/>
 	</parent>
 
@@ -22,6 +22,7 @@
 		<lombok.version>1.18.30</lombok.version>
 		<jjwt.version>0.11.5</jjwt.version>
 		<springdoc.version>2.3.0</springdoc.version>
+		<spring-cloud.version>2024.0.0</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -65,12 +66,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--	Spring Security	-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
 		<!-- JWT Support -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -97,6 +92,12 @@
 			<version>${springdoc.version}</version>
 		</dependency>
 
+		<!-- Eureka Client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
 		<!-- Development Tools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -117,6 +118,18 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
