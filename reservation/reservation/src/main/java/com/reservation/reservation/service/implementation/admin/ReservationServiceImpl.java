@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,7 +26,7 @@ public class ReservationServiceImpl implements ReservationService {
    public List<ReservationDTO> getAllReservations() {
     return reservationRepository.findAll().stream()
             .map(reservationMapper::toDTO)
-            .collect(Collectors.toList());
+            .toList();
 }
 
     @Override
@@ -55,6 +54,6 @@ public class ReservationServiceImpl implements ReservationService {
     public List<ReservationDTO> getReservationsByStatus(ReservationStatus status) {
         return reservationRepository.findByStatus(status).stream()
                 .map(reservationMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

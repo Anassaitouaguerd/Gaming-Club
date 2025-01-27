@@ -13,7 +13,6 @@ public interface ReservationService {
     List<ReservationDTO> getAllReservations();
 //    List<Reservation> getReservationsByFilter(Map<String, Object> filters);
 
-
     boolean acceptReservation(Long reservationId);
     boolean cancelReservation(Long reservationId);
 

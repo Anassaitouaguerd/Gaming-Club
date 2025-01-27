@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -41,7 +38,7 @@ public class ClubManagmentServiceImpl implements ClubManagmentService {
     public List<ClubDTO> getAllClubs() {
         return clubRepository.findAll().stream()
                 .map(clubMapper::toClubDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -66,7 +63,7 @@ public class ClubManagmentServiceImpl implements ClubManagmentService {
             List<Resource> resources = club.resourceIds().stream()
                     .map(resourceId -> resourceRepository.findById(resourceId)
                             .orElseThrow(() -> new IllegalArgumentException("Resource not found with id: " + resourceId)))
-                    .collect(Collectors.toList());
+                    .toList();
 
             existingClub.setResources(resources);
         }

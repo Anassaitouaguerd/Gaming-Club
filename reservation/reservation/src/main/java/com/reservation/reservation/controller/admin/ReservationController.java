@@ -1,7 +1,6 @@
 package com.reservation.reservation.controller.admin;
 
 import com.reservation.reservation.dto.ReservationDTO;
-import com.reservation.reservation.entity.Reservation;
 import com.reservation.reservation.entity.enums.ReservationStatus;
 import com.reservation.reservation.service.interfaces.admin.ReservationService;
 import lombok.AllArgsConstructor;

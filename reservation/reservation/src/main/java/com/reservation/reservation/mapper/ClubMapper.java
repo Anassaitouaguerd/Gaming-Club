@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ClubMapper {
@@ -31,7 +30,7 @@ public class ClubMapper {
                 .resourceIds(club.getResources() != null
                         ? club.getResources().stream()
                         .map(Resource::getId)
-                        .collect(Collectors.toList())
+                        .toList()
                         : null)
                 .build();
     }
@@ -56,7 +55,7 @@ public class ClubMapper {
             List<Resource> resources = clubDTO.resourceIds().stream()
                     .map(resourceId -> resourceRepository.findById(resourceId)
                             .orElseThrow(() -> new IllegalArgumentException("Resource not found with id: " + resourceId)))
-                    .collect(Collectors.toList());
+                    .toList();
 
             club.setResources(resources);
             resources.forEach(resource -> resource.setClub(club));
