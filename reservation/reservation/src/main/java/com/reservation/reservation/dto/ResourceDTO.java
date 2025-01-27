@@ -9,5 +9,6 @@ public record ResourceDTO(
         Long id,
         String name,
         ResourceType type,
-        ResourceStatus status
+        ResourceStatus status,
+        Long clubId
 ) {}

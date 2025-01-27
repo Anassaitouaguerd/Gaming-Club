@@ -7,7 +7,8 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,10 +20,10 @@ public class Resource {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private ResourceType type;  // BILLIARD_TABLE, FOOSBALL, PC_STATION, VR_STATION
+    private ResourceType type;
 
     @Enumerated(EnumType.STRING)
-    private ResourceStatus status;  // AVAILABLE, OCCUPIED, MAINTENANCE, DAMAGED
+    private ResourceStatus status;
 
     @ManyToOne
     private Club club;
