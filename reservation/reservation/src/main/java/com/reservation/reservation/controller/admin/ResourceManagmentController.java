@@ -48,7 +48,7 @@ public class ResourceManagmentController {
     public ResponseEntity<ResourceDTO> createResource(@Valid @RequestBody ResourceDTO resourceDTO){
         return ResponseEntity.ok(resourceManagmentService.createResource(resourceDTO));
     }
-
+    
     @PutMapping("/update/{resourceId}")
     public ResponseEntity<ResourceDTO> updateResource(@PathVariable Long resourceId , @Valid @RequestBody ResourceDTO resourceDTO){
         return ResponseEntity.ok(resourceManagmentService.updateResource(resourceId , resourceDTO));

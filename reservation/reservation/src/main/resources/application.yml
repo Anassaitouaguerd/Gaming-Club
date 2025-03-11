@@ -1,6 +1,6 @@
 spring:
   application:
-    name: reservation_service
+    name: reservation-service
   datasource:
     url: jdbc:postgresql://localhost:2025/reservation_db
     username: postgres
@@ -14,6 +14,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 logging:
   level:
     org:
@@ -31,5 +33,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8765/eureka/
+  instance:
+    hostname: localhost
+    preferIpAddress: false
+
 
 debug: true
+server:
+  port: 8081
