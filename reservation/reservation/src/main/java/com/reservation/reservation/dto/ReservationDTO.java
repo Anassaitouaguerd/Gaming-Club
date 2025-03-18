@@ -1,5 +1,6 @@
 package com.reservation.reservation.dto;
 
+import com.reservation.reservation.dto.resource.ResourceDTO;
 import com.reservation.reservation.entity.enums.ReservationStatus;
 import lombok.Builder;
 

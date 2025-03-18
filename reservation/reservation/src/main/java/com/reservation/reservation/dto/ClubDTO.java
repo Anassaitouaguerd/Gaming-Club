@@ -1,5 +1,7 @@
 package com.reservation.reservation.dto;
 
+import com.reservation.reservation.dto.resource.ResourceResponseDTO;
+import com.reservation.reservation.entity.Resource;
 import lombok.Builder;
 
 import java.util.List;
@@ -12,5 +14,5 @@ public record ClubDTO(
         String address,
         String description,
         String contactInfo,
-        List<Long> resourceIds
+        List<ResourceResponseDTO> resources
 ) {}

@@ -1,6 +1,6 @@
 package com.reservation.reservation.service.implementation.admin;
 
-import com.reservation.reservation.dto.ResourceDTO;
+import com.reservation.reservation.dto.resource.ResourceDTO;
 import com.reservation.reservation.entity.Club;
 import com.reservation.reservation.entity.Resource;
 import com.reservation.reservation.entity.enums.ResourceStatus;

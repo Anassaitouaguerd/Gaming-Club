@@ -1,4 +1,4 @@
-package com.reservation.reservation.dto;
+package com.reservation.reservation.dto.resource;
 
 import com.reservation.reservation.entity.enums.ResourceStatus;
 import com.reservation.reservation.entity.enums.ResourceType;

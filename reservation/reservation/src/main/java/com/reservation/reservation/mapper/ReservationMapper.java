@@ -1,7 +1,7 @@
 package com.reservation.reservation.mapper;
 
 import com.reservation.reservation.dto.ReservationDTO;
-import com.reservation.reservation.dto.ResourceDTO;
+import com.reservation.reservation.dto.resource.ResourceDTO;
 import com.reservation.reservation.entity.Reservation;
 import com.reservation.reservation.entity.Resource;
 import lombok.AllArgsConstructor;

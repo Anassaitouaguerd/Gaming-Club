@@ -12,7 +12,7 @@ public interface ClubManagmentService {
     // Read operations
     ClubDTO getClubById(Long clubId);
     List<ClubDTO> getAllClubs();
-    List<Club> getClubsByCity(String city);
+    List<ClubDTO> getClubsByCity(String city);
 
     // Update operations
     ClubDTO updateClub(Long clubId, ClubDTO club);

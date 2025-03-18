@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reservation")
+@RequestMapping("/reservation")
 @AllArgsConstructor
 
 public class AdminReservationController {
