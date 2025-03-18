@@ -5,6 +5,26 @@ spring:
     web-application-type: reactive
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "Origin"
+              - "Content-Type"
+              - "Accept"
+              - "Authorization"
+            exposedHeaders:
+              - "Authorization"
+            allowCredentials: true
+            maxAge: 3600
       discovery:
         locator:
           enabled: true
@@ -13,9 +33,10 @@ spring:
         - id: reservation-all
           uri: lb://reservation-service
           predicates:
-            - Path=/reservation-service/all
+            - Path=/reservation-service/reservation/all
           filters:
-            - SetPath=/api/v1/reservation/all
+            - SetPath=/reservation/all
+            - RemoveRequestHeader=Authorization
 
         - id: reservation-get
           uri: lb://reservation-service
@@ -23,6 +44,102 @@ spring:
             - Path=/reservation-service/get/**
           filters:
             - RewritePath=/reservation-service/get/(?<segment>.*), /api/v1/reservation/get/${segment}
+            - RemoveRequestHeader=Authorization
+
+        # User Service Routes
+        - id: user-all
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/user/all
+          filters:
+            - SetPath=/user/all
+            - RemoveRequestHeader=Authorization
+
+        - id: user-update
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/user/update/**
+          filters:
+            - RewritePath=/user-service/update/(?<segment>.*), /user/update/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: user-get
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/get/**
+          filters:
+            - RewritePath=/user-service/get/(?<segment>.*), user/get/${segment}
+
+        # Auth Service Routes
+        - id: auth-register
+          uri: lb://user-service
+          predicates:
+            - Path=/auth/register
+          filters:
+            - SetPath=/auth/register
+            - RemoveRequestHeader=Authorization
+
+        - id: auth-login
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/auth/login
+          filters:
+            - SetPath=/auth/login
+            - RemoveRequestHeader=Authorization
+        - id: auth-validate
+          uri: lb://user-service
+          predicates:
+            - Path=/auth/validate
+          filters:
+            - SetPath=/auth/validate
+
+        - id: auth-user
+          uri: lb://user-service
+          predicates:
+            - Path=/auth/user
+          filters:
+            - SetPath=/auth/user
+
+        # Club Management Routes
+        - id: club-all
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/all
+          filters:
+            - SetPath=/club/all
+            - RemoveRequestHeader=Authorization
+
+        - id: club-get
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/get/**
+          filters:
+            - RewritePath=/reservation-service/club/get/(?<segment>.*), /club/get/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: club-add
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/add
+          filters:
+            - SetPath=/club/add
+            - RemoveRequestHeader=Authorization
+
+        - id: club-update
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/update/**
+          filters:
+            - RewritePath=/reservation-service/club/update/(?<segment>.*), /club/update/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: club-delete
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/delete/**
+          filters:
+            - RewritePath=/reservation-service/club/delete/(?<segment>.*), /club/delete/${segment}
+            - RemoveRequestHeader=Authorization
 
 server:
   port: 8766
