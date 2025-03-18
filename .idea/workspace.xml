@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="255c921b-24c9-41af-ad2d-07686d75bea1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/controller/crud/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/controller/crud/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/implementations/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/implementations/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/interfaces/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/interfaces/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +38,13 @@
     &quot;accountId&quot;: &quot;3936cbfd-e852-4286-bad0-f75dbe83e73b&quot;
   }
 }</component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -37,7 +55,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ReservationApplication.executor": "Run",
+    "Spring Boot.ServiceRegistryApplication.executor": "Run",
+    "Spring Boot.UserApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Youcode/Documents/fillRouje/Gaming-Club/user",
@@ -46,10 +72,29 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
   <component name="RunManager" selected="Spring Boot.ServiceRegistryApplication">
+    <configuration name="ReservationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="reservation" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.reservation.reservation.ReservationApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ServiceRegistryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="service-registry" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.EurekaServer.service_registry.ServiceRegistryApplication" />
@@ -83,7 +128,8 @@
       <option name="presentableId" value="Default" />
       <updated>1737381619443</updated>
       <workItem from="1737381620659" duration="32000" />
-      <workItem from="1741963157437" duration="337000" />
+      <workItem from="1741963157437" duration="3104000" />
+      <workItem from="1742134081556" duration="898000" />
     </task>
     <servers />
   </component>

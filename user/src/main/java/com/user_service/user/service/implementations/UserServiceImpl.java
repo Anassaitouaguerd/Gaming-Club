@@ -6,27 +6,29 @@ import com.user_service.user.entity.User;
 import com.user_service.user.mapper.UserMapper;
 import com.user_service.user.repository.RoleRepository;
 import com.user_service.user.repository.UserRepository;
-import com.user_service.user.service.interfaces.UserInterface;
+import com.user_service.user.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserInterface {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public User addUser(UserDTO userDTO) {
+    public UserDTO addUser(UserDTO userDTO) {
         if (userDTO == null) {
             throw new IllegalArgumentException("UserDTO cannot be null");
         }
 
-        User user = UserMapper.INSTANCE.toEntity(userDTO);
+        User user = userMapper.toEntity(userDTO);
         String defaultPassword = generateDefaultPassword(user.getFirstName());
         user.setPassword(passwordEncoder.encode(defaultPassword));
 
@@ -34,19 +36,22 @@ public class UserService implements UserInterface {
                 .orElseThrow(() -> new RuntimeException("Default MEMBER role not found"));
         user.setRole(memberRole);
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        return userMapper.toDTO(savedUser);
     }
 
     @Override
-    public User updateUser(Long userID , UserDTO userDTO) {
-        User user = UserMapper.INSTANCE.toEntity(userDTO);
+    public UserDTO updateUser(Long userID, UserDTO userDTO) {
+        User user = userMapper.toEntity(userDTO);
         String defaultPassword = generateDefaultPassword(user.getFirstName());
         Role memberRole = roleRepository.findByName(userDTO.role().name())
                 .orElseThrow(() -> new RuntimeException("Default MEMBER role not found"));
         user.setId(userID);
         user.setRole(memberRole);
         user.setPassword(passwordEncoder.encode(defaultPassword));
-        return userRepository.save(user);
+
+        User updatedUser = userRepository.save(user);
+        return userMapper.toDTO(updatedUser);
     }
 
     @Override
@@ -57,8 +62,11 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(userMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     private String generateDefaultPassword(String firstName) {

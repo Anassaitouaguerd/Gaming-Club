@@ -1,8 +1,7 @@
 package com.user_service.user.controller.crud;
 
 import com.user_service.user.dto.user.UserDTO;
-import com.user_service.user.entity.User;
-import com.user_service.user.service.implementations.UserService;
+import com.user_service.user.service.interfaces.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -14,18 +13,18 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/user")
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUser(@Valid @RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO userDTO){
         return ResponseEntity.ok(userService.addUser(userDTO));
     }
 
     @PutMapping("/update/{userID}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userID, @Valid @RequestBody UserDTO userDTO){
-        return ResponseEntity.ok(userService.updateUser(userID , userDTO));
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long userID, @Valid @RequestBody UserDTO userDTO){
+        return ResponseEntity.ok(userService.updateUser(userID, userDTO));
     }
 
     @DeleteMapping("/delete/{userID}")
@@ -35,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
         return ResponseEntity.of(Optional.ofNullable(userService.getAllUsers()));
     }
 }

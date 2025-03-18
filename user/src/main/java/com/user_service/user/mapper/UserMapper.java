@@ -1,44 +1,71 @@
 package com.user_service.user.mapper;
 
+import com.user_service.user.dto.user.UserCreatedDTO;
 import com.user_service.user.dto.user.UserDTO;
 import com.user_service.user.entity.Role;
 import com.user_service.user.entity.User;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-import javax.xml.transform.Source;
-import java.lang.annotation.Target;
+@Component
+public class UserMapper {
 
-@Mapper(
-        componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS
-)
-public interface UserMapper {
+    public UserDTO toDTO(User user) {
+        if (user == null) {
+            return null;
+        }
 
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+        String roleName = null;
+        if (user.getRole() != null) {
+            roleName = user.getRole().getName();
+        }
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "username", source = "username")
-    @Mapping(target = "email", source = "email")
-    @Mapping(target = "phoneNumber", source = "phoneNumber")
-    @Mapping(target = "role", source = "role", qualifiedByName = "roleToString")
-    @Mapping(target = "firstName", source = "firstName")
-    @Mapping(target = "lastName", source = "lastName")
-    UserDTO toDTO(User user);
-
-    @InheritInverseConfiguration
-    @Mapping(target = "role", source = "role", qualifiedByName = "stringToRole")
-    User toEntity(UserDTO dto);
-
-    @Named("roleToString")
-    default String roleToString(Role role) {
-        return role != null ? role.getName() : null;
+        return new UserDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                roleName != null ? com.user_service.user.entity.enums.Role.valueOf(roleName) : null,
+                user.getPhoneNumber()
+        );
     }
 
-    @Named("stringToRole")
-    default Role stringToRole(String roleName) {
-        return roleName != null ? Role.builder().name(roleName).build() : null;
+    public User toEntity(UserDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        User user = new User();
+        user.setId(dto.id());
+        user.setUsername(dto.username());
+        user.setEmail(dto.email());
+        user.setFirstName(dto.firstName());
+        user.setLastName(dto.lastName());
+        user.setPhoneNumber(dto.phoneNumber());
+
+        return user;
     }
 
+    public User toUserEntity(UserCreatedDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        User user = new User();
+        user.setUsername(dto.username());
+        user.setEmail(dto.email());
+        user.setFirstName(dto.firstName());
+        user.setLastName(dto.lastName());
+        user.setPhoneNumber(dto.phoneNumber());
+
+        return user;
+    }
+
+
+    public Role createRole(String roleName) {
+        if (roleName == null) {
+            return null;
+        }
+        return Role.builder().name(roleName).build();
+    }
 }
