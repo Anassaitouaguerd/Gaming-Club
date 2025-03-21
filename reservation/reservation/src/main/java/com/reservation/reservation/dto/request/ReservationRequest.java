@@ -7,6 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record ReservationRequest(
+
+        @NotNull(message = "Club ID is required")
+        Long clubId,
+
         @NotNull(message = "Resource ID is required")
         Long resourceId,
 
