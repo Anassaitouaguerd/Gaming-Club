@@ -43,7 +43,56 @@ spring:
           predicates:
             - Path=/reservation-service/get/**
           filters:
-            - RewritePath=/reservation-service/get/(?<segment>.*), /api/v1/reservation/get/${segment}
+            - RewritePath=/reservation-service/get/(?<segment>.*), /reservation/get/${segment}
+            - RemoveRequestHeader=Authorization
+
+        # New Reservation Member Endpoints
+        - id: reservation-resources-available
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/reservations/resources/available
+          filters:
+            - SetPath=/reservations/resources/available
+            - RemoveRequestHeader=Authorization
+
+        - id: reservation-create
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/member/reservation/create/**
+          filters:
+            - RewritePath=/reservation-service/member/reservation/create/(?<segment>.*), /member/reservation/create/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: about-reservation-create
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/member/about/reservation/create
+          filters:
+            - RemoveRequestHeader=Authorization
+            - RewritePath=/reservation-service/(?<remaining>.*), /${remaining}
+
+        - id: reservation-cancel
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/reservations/cancel/**
+          filters:
+            - RewritePath=/reservation-service/reservations/cancel/(?<segment>.*), /reservations/cancel/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: reservation-update
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/reservations/update/**
+          filters:
+            - RewritePath=/reservation-service/reservations/update/(?<segment>.*), /reservations/update/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: reservation-user
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/reservations/user/**
+          filters:
+            - RewritePath=/reservation-service/reservations/user/(?<segment>.*), /reservations/user/${segment}
             - RemoveRequestHeader=Authorization
 
         # User Service Routes
@@ -69,6 +118,22 @@ spring:
             - Path=/user-service/get/**
           filters:
             - RewritePath=/user-service/get/(?<segment>.*), user/get/${segment}
+
+        - id: user-get-by-email
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/user/get/byEmail/**
+          filters:
+            - RewritePath=/user-service/user/get/byEmail/(?<segment>.*), /user/get/byEmail/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: user-get-by-username
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/user/get/byUserName/**
+          filters:
+            - RewritePath=/user-service/user/get/byUserName/(?<segment>.*), /user/get/byUserName/${segment}
+            - RemoveRequestHeader=Authorization
 
         # Auth Service Routes
         - id: auth-register

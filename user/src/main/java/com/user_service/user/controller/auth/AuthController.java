@@ -7,6 +7,7 @@ import com.user_service.user.entity.User;
 import com.user_service.user.mapper.UserMapper;
 import com.user_service.user.security.JwtTokenProvider;
 import com.user_service.user.service.implementations.AuthServiceImpl;
+import com.user_service.user.service.interfaces.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ import java.util.Map;
 @Tag(name = "Authentication", description = "Authentication API")
 public class AuthController {
 
-    private final AuthServiceImpl authService;
+    private final AuthService authService;
     private final UserMapper userMapper;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
