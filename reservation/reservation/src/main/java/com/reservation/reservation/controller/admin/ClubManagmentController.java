@@ -24,6 +24,7 @@ public class ClubManagmentController {
 
     @GetMapping("/get/{clubId}")
     public ResponseEntity<ClubDTO> getClubById(@PathVariable Long clubId){
+        System.out.println(clubId);
         return ResponseEntity.ok(clubManagmentService.getClubById(clubId));
     }
 

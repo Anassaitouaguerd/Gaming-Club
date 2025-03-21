@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/club/search")
+@RequestMapping("/club/search")
 public class ClubSearchController {
 
     private final ClubSearchService clubSearchService;
