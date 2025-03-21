@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,12 +67,12 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/login").permitAll()
+//                                .requestMatchers("/auth/login").permitAll()
 //                        .requestMatchers("/api/v1/admin/user/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").permitAll()
                 )
                 .httpBasic(customizer -> {})
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
@@ -84,14 +85,14 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/register", "/login").permitAll()
+//                                .requestMatchers("/auth/register", "/auth/login").permitAll()
                                 .requestMatchers("/user/**").permitAll()
 //                                .requestMatchers("/employee/**").hasRole("EMPLOYEE")
 //                        .requestMatchers("/api/v1/admin/user/**").hasRole("ADMIN")
 //                        .requestMatchers("/api/v1/admin/user/new").permitAll() // Temporarily allow for testing
                                 .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

@@ -44,4 +44,7 @@ public class User {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
+    @Column(name = "club_id")
+    private Long clubId;
+
 }
