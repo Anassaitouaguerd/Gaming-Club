@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="255c921b-24c9-41af-ad2d-07686d75bea1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/member/AboutReservationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/dto/aboutReservations/AboutReservationsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/entity/AboutReservations.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/mapper/abourtReservations/AboutReservationsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/repository/AboutReservationsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/implementation/member/AboutReservationServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/interfaces/member/AboutReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/admin/ClubManagmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/admin/ClubManagmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/member/ClubSearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/member/ClubSearchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/member/MemberReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/member/MemberReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/dto/request/ReservationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/dto/request/ReservationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/implementation/member/ReservationMemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/implementation/member/ReservationMemberServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/controller/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/controller/auth/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/controller/crud/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/controller/crud/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/implementations/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/implementations/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/interfaces/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/service/interfaces/AuthService.java" afterDir="false" />
-    </list>
+    <list default="true" id="255c921b-24c9-41af-ad2d-07686d75bea1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
