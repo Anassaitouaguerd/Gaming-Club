@@ -3,6 +3,7 @@ package com.reservation.reservation.service.implementation.member;
 import com.reservation.reservation.dto.request.ReservationRequest;
 import com.reservation.reservation.dto.request.ReservationResponse;
 import com.reservation.reservation.dto.request.ResourceResponse;
+import com.reservation.reservation.entity.Club;
 import com.reservation.reservation.entity.Resource;
 import com.reservation.reservation.entity.Reservation;
 import com.reservation.reservation.entity.enums.ResourceStatus;
@@ -11,6 +12,7 @@ import com.reservation.reservation.exceptions.ResourceNotFoundException;
 import com.reservation.reservation.exceptions.InvalidReservationException;
 import com.reservation.reservation.mapper.request.MemberReservationMapper;
 import com.reservation.reservation.mapper.request.MemberResourceMapper;
+import com.reservation.reservation.repository.ClubRepository;
 import com.reservation.reservation.repository.ReservationRepository;
 import com.reservation.reservation.repository.ResourceRepository;
 import com.reservation.reservation.service.interfaces.member.ReservationMemberService;
@@ -28,6 +30,7 @@ public class ReservationMemberServiceImpl implements ReservationMemberService {
 
     private final ReservationRepository reservationRepository;
     private final ResourceRepository resourceRepository;
+    private final ClubRepository clubRepository;
     private final MemberReservationMapper reservationMapper;
     private final MemberResourceMapper resourceMapper;
 
@@ -45,6 +48,8 @@ public class ReservationMemberServiceImpl implements ReservationMemberService {
 
         Resource resource = resourceRepository.findById(request.resourceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Resource not found with id: " + request.resourceId()));
+        Club club = clubRepository.findById(request.clubId())
+                .orElseThrow(() -> new ResourceNotFoundException("Club not found with id: " + request.clubId()));
 
         if (resource.getStatus() != ResourceStatus.AVAILABLE) {
             throw new InvalidReservationException("Resource is not available for reservation");
@@ -67,6 +72,7 @@ public class ReservationMemberServiceImpl implements ReservationMemberService {
                 .startTime(request.startTime())
                 .endTime(request.endTime())
                 .status(ReservationStatus.PENDING)
+                .club(club)
                 .createdAt(LocalDateTime.now())
                 .build();
 
