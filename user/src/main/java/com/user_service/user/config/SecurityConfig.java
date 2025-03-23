@@ -43,10 +43,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-//                "http://localhost:4200",
                 "http://localhost:3000",
                 "http://localhost:8080"
-                // Add any additional origins here
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
@@ -63,13 +61,12 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
         http
-//                .securityMatcher("/api/v1/admin/**")
                 .securityMatcher("/**")
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/auth/**").permitAll()
-//                                .requestMatchers("/auth/login").permitAll()
-//                        .requestMatchers("/api/v1/admin/user/**").hasRole("ADMIN")
+                                .requestMatchers("/auth/getCurrentUser/**").permitAll()
                                 .requestMatchers("/user/**").permitAll()
+                                .requestMatchers("/user/username/**", "/user/{id}").permitAll()
                 )
                 .httpBasic(customizer -> {})
                 .csrf(AbstractHttpConfigurer::disable)
@@ -85,11 +82,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/auth/**").permitAll()
-//                                .requestMatchers("/auth/register", "/auth/login").permitAll()
+                                .requestMatchers("/auth/getCurrentUser/**").permitAll()
                                 .requestMatchers("/user/**").permitAll()
-//                                .requestMatchers("/employee/**").hasRole("EMPLOYEE")
-//                        .requestMatchers("/api/v1/admin/user/**").hasRole("ADMIN")
-//                        .requestMatchers("/api/v1/admin/user/new").permitAll() // Temporarily allow for testing
+                                .requestMatchers("/user/username/**", "/user/{id}").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)

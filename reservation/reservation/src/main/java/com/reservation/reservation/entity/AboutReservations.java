@@ -25,7 +25,7 @@ public class AboutReservations {
     private String preferredPlatform;
 
     @Column(name = "booking_date", nullable = false)
-    private LocalDateTime bookingDate;
+    private String bookingDate;
 
     @Column(name = "duration", nullable = false)
     private Integer duration;

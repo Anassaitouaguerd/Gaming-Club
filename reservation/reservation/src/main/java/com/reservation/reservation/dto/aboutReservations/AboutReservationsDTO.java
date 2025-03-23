@@ -10,7 +10,7 @@ public record AboutReservationsDTO(
         Long id,
         String experienceLevel,
         String preferredPlatform,
-        LocalDateTime bookingDate,
+        String bookingDate,
         Integer duration,
         Integer stationNumber,
         String additionalRequests,

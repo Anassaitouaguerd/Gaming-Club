@@ -30,6 +30,10 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.toEntity(userDTO);
         String defaultPassword = generateDefaultPassword(user.getFirstName());
+        if(user.getUsername() == null){
+            String username = generateDefaultUsername(user.getFirstName() , user.getLastName());
+            user.setUsername(username);
+        }
         user.setPassword(passwordEncoder.encode(defaultPassword));
 
         Role memberRole = roleRepository.findByName(userDTO.role().name())
@@ -71,5 +75,9 @@ public class UserServiceImpl implements UserService {
 
     private String generateDefaultPassword(String firstName) {
         return firstName + "2025";
+    }
+
+    private String generateDefaultUsername(String firstName , String lastName){
+        return firstName + "_" + lastName;
     }
 }

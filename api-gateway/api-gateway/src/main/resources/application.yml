@@ -30,6 +30,7 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
+        # Reservation Service Routes
         - id: reservation-all
           uri: lb://reservation-service
           predicates:
@@ -46,7 +47,6 @@ spring:
             - RewritePath=/reservation-service/get/(?<segment>.*), /reservation/get/${segment}
             - RemoveRequestHeader=Authorization
 
-        # New Reservation Member Endpoints
         - id: reservation-resources-available
           uri: lb://reservation-service
           predicates:
@@ -95,6 +95,55 @@ spring:
             - RewritePath=/reservation-service/reservations/user/(?<segment>.*), /reservations/user/${segment}
             - RemoveRequestHeader=Authorization
 
+        # Club Management Routes
+        - id: club-all
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/all
+          filters:
+            - SetPath=/club/all
+            - RemoveRequestHeader=Authorization
+
+        - id: club-get
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/get/**
+          filters:
+            - RewritePath=/reservation-service/club/get/(?<segment>.*), /club/get/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: club-add
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/add
+          filters:
+            - SetPath=/club/add
+            - RemoveRequestHeader=Authorization
+
+        - id: club-update
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/update/**
+          filters:
+            - RewritePath=/reservation-service/club/update/(?<segment>.*), /club/update/${segment}
+            - RemoveRequestHeader=Authorization
+
+        - id: club-delete
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/club/delete/**
+          filters:
+            - RewritePath=/reservation-service/club/delete/(?<segment>.*), /club/delete/${segment}
+            - RemoveRequestHeader=Authorization
+
+        # Staff Club Routes
+        - id: staff-clubs
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs
+          filters:
+            - SetPath=/api/staff/clubs
+
         # User Service Routes
         - id: user-all
           uri: lb://user-service
@@ -102,6 +151,14 @@ spring:
             - Path=/user-service/user/all
           filters:
             - SetPath=/user/all
+            - RemoveRequestHeader=Authorization
+
+        - id: user-create
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/user/add
+          filters:
+            - SetPath=/user/add
             - RemoveRequestHeader=Authorization
 
         - id: user-update
@@ -151,6 +208,15 @@ spring:
           filters:
             - SetPath=/auth/login
             - RemoveRequestHeader=Authorization
+
+        - id: auth-logout
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/auth/logout
+          filters:
+            - SetPath=/auth/logout
+            - RemoveRequestHeader=Authorization
+
         - id: auth-validate
           uri: lb://user-service
           predicates:
@@ -165,46 +231,12 @@ spring:
           filters:
             - SetPath=/auth/user
 
-        # Club Management Routes
-        - id: club-all
-          uri: lb://reservation-service
+        - id: auth-getCurrentUser
+          uri: lb://user-service
           predicates:
-            - Path=/reservation-service/club/all
+            - Path=/user-service/auth/getCurrentUser/**
           filters:
-            - SetPath=/club/all
-            - RemoveRequestHeader=Authorization
-
-        - id: club-get
-          uri: lb://reservation-service
-          predicates:
-            - Path=/reservation-service/club/get/**
-          filters:
-            - RewritePath=/reservation-service/club/get/(?<segment>.*), /club/get/${segment}
-            - RemoveRequestHeader=Authorization
-
-        - id: club-add
-          uri: lb://reservation-service
-          predicates:
-            - Path=/reservation-service/club/add
-          filters:
-            - SetPath=/club/add
-            - RemoveRequestHeader=Authorization
-
-        - id: club-update
-          uri: lb://reservation-service
-          predicates:
-            - Path=/reservation-service/club/update/**
-          filters:
-            - RewritePath=/reservation-service/club/update/(?<segment>.*), /club/update/${segment}
-            - RemoveRequestHeader=Authorization
-
-        - id: club-delete
-          uri: lb://reservation-service
-          predicates:
-            - Path=/reservation-service/club/delete/**
-          filters:
-            - RewritePath=/reservation-service/club/delete/(?<segment>.*), /club/delete/${segment}
-            - RemoveRequestHeader=Authorization
+            - RewritePath=/user-service/auth/getCurrentUser/(?<segment>.*), /auth/getCurrentUser/${segment}
 
 server:
   port: 8766

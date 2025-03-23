@@ -1,4 +1,9 @@
 package com.reservation.reservation.service.interfaces.staff;
 
-public class StaffClubService {
+import com.reservation.reservation.dto.ClubDTO;
+
+import java.util.List;
+
+public interface StaffClubService {
+    List<ClubDTO> getClubByStaff();
 }

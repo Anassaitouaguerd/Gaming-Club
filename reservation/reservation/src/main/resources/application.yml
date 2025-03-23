@@ -16,6 +16,15 @@ spring:
     show-sql: true
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  cloud:
+    openfeign:
+      client:
+        config:
+          user-service:
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: full
+
 logging:
   level:
     org:
@@ -25,6 +34,12 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+    # Add Feign logging
+    com.reservation.reservation.client: DEBUG
+
+    root: DEBUG
+    com.reservation.reservation.security: DEBUG
+
 jwt:
   secret: Anass-secret-key-is-very-long-and-secure-key
   expiration: 3600000
@@ -36,7 +51,6 @@ eureka:
   instance:
     hostname: localhost
     preferIpAddress: false
-
 
 debug: true
 server:

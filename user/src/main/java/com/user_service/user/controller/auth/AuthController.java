@@ -62,12 +62,11 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-//    @GetMapping("/validate")
-//    @Operation(summary = "Validate JWT token")
-//    public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
-//        boolean isValid = jwtTokenProvider.validateToken(token);
-//        return ResponseEntity.ok(isValid);
-//    }
+    @PostMapping("/logout")
+    @Operation(summary = "Logout a user")
+    public ResponseEntity<?> logout(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok().body(Map.of("message", "Logged out successfully"));
+    }
 
     @GetMapping("/user")
     @Operation(summary = "Get user details by username")
@@ -76,9 +75,9 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/getCurrentUser")
+    @GetMapping("/getCurrentUser/{token}")
     @Operation(summary = "Get Current user by decoding JWT")
-    public ResponseEntity<UserDTO> getCurrentUser(@RequestParam String token){
+    public ResponseEntity<UserDTO> getCurrentUser(@PathVariable String token){
         String username = jwtTokenProvider.getUsernameFromToken(token);
         UserDTO user = authService.findUserByUsername(username);
         return ResponseEntity.ok(user);

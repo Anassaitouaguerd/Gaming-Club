@@ -27,7 +27,7 @@ logging:
               BasicBinder: TRACE
 jwt:
   secret: Anass-secret-key-is-very-long-and-secure-key
-  expiration: 3600000
+  expiration: 86400000
 
 eureka:
   client:
