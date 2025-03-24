@@ -36,8 +36,6 @@ logging:
               BasicBinder: TRACE
     # Add Feign logging
     com.reservation.reservation.client: DEBUG
-
-    root: DEBUG
     com.reservation.reservation.security: DEBUG
 
 jwt:

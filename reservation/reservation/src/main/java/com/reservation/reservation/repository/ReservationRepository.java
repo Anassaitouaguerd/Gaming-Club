@@ -33,4 +33,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             @Param("excludeReservationId") Long excludeReservationId);
 
     List<Reservation> findByUserIdOrderByStartTimeDesc(Long memberId);
+
+    @Query("SELECT r FROM Reservation r WHERE r.club.id = :clubId ORDER BY r.startTime DESC")
+    List<Reservation> findByClubId(@Param("clubId") Long clubId);
+
+    @Query("SELECT r FROM Reservation r WHERE r.club.id IN :clubIds ORDER BY r.startTime DESC")
+    List<Reservation> findByClubIdIn(@Param("clubIds") List<Long> clubIds);
 }

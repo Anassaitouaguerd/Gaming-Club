@@ -1,11 +1,12 @@
 package com.reservation.reservation.controller.staff;
 
-import com.reservation.reservation.dto.ClubDTO;
+import com.reservation.reservation.dto.staff.ClubStaffDTO;
+import com.reservation.reservation.dto.staff.ReservationStaffDTO;
 import com.reservation.reservation.service.interfaces.staff.StaffClubService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,9 +20,20 @@ public class StaffClubController {
     private final StaffClubService staffClubService;
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('STAFF')")  // Ensures only users with STAFF role can access this endpoint
-    public ResponseEntity<List<ClubDTO>> getStaffClubs() {
-        List<ClubDTO> clubs = staffClubService.getClubByStaff();
+    public ResponseEntity<List<ClubStaffDTO>> getStaffClubs() {
+        List<ClubStaffDTO> clubs = staffClubService.getClubByStaff();
         return ResponseEntity.ok(clubs);
+    }
+
+    @GetMapping("/all/reservations")
+    public ResponseEntity<List<ReservationStaffDTO>> getStaffReservations() {
+        List<ReservationStaffDTO> reservations = staffClubService.getReservationsByStaffClubs();
+        return ResponseEntity.ok(reservations);
+    }
+
+    @GetMapping("/club/{clubId}")
+    public ResponseEntity<List<ReservationStaffDTO>> getReservationsByClub(@PathVariable Long clubId) {
+        List<ReservationStaffDTO> reservations = staffClubService.getReservationsByClub(clubId);
+        return ResponseEntity.ok(reservations);
     }
 }

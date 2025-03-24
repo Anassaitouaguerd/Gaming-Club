@@ -8,21 +8,10 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins:
-              - "http://localhost:4200"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-            allowedHeaders:
-              - "Origin"
-              - "Content-Type"
-              - "Accept"
-              - "Authorization"
-            exposedHeaders:
-              - "Authorization"
+            allowedOrigins: ["http://localhost:4200"]
+            allowedMethods: [GET, POST, PUT, DELETE, OPTIONS]
+            allowedHeaders: ["Origin", "Content-Type", "Accept", "Authorization"]
+            exposedHeaders: ["Authorization"]
             allowCredentials: true
             maxAge: 3600
       discovery:
@@ -68,8 +57,8 @@ spring:
           predicates:
             - Path=/reservation-service/member/about/reservation/create
           filters:
-            - RemoveRequestHeader=Authorization
             - RewritePath=/reservation-service/(?<remaining>.*), /${remaining}
+            - RemoveRequestHeader=Authorization
 
         - id: reservation-cancel
           uri: lb://reservation-service
@@ -137,12 +126,37 @@ spring:
             - RemoveRequestHeader=Authorization
 
         # Staff Club Routes
-        - id: staff-clubs
+        - id: staff-clubs-all
           uri: lb://reservation-service
           predicates:
-            - Path=/reservation-service/staff/clubs
+            - Path=/reservation-service/staff/clubs/all
           filters:
-            - SetPath=/api/staff/clubs
+            - SetPath=/staff/clubs/all
+            # Authorization header is preserved for staff endpoints
+
+        - id: staff-clubs-all-reservations
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs/all/reservations
+          filters:
+            - SetPath=/staff/clubs/all/reservations
+            # Authorization header is preserved
+
+        - id: staff-clubs-with-club-id
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs/club/**
+          filters:
+            - RewritePath=/reservation-service/staff/clubs/club/(?<segment>.*), /staff/clubs/club/${segment}
+            # Authorization header is preserved
+
+        - id: staff-clubs-base
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs/**
+          filters:
+            - RewritePath=/reservation-service/staff/clubs/(?<segment>.*), /staff/clubs/${segment}
+            # Authorization header is preserved
 
         # User Service Routes
         - id: user-all
@@ -175,6 +189,7 @@ spring:
             - Path=/user-service/get/**
           filters:
             - RewritePath=/user-service/get/(?<segment>.*), user/get/${segment}
+            # Missing RemoveRequestHeader filter
 
         - id: user-get-by-email
           uri: lb://user-service
@@ -223,6 +238,7 @@ spring:
             - Path=/auth/validate
           filters:
             - SetPath=/auth/validate
+            # Authorization header is preserved
 
         - id: auth-user
           uri: lb://user-service
@@ -230,6 +246,7 @@ spring:
             - Path=/auth/user
           filters:
             - SetPath=/auth/user
+            # Authorization header is preserved
 
         - id: auth-getCurrentUser
           uri: lb://user-service
@@ -237,6 +254,7 @@ spring:
             - Path=/user-service/auth/getCurrentUser/**
           filters:
             - RewritePath=/user-service/auth/getCurrentUser/(?<segment>.*), /auth/getCurrentUser/${segment}
+            # Authorization header is preserved
 
 server:
   port: 8766
