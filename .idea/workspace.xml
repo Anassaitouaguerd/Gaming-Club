@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="255c921b-24c9-41af-ad2d-07686d75bea1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/reservation/reservation/src/test/java/com/reservation/reservation/member/ReservationMemberServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/src/test/java/com/user_service/user/user/UserServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/api-gateway/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reservation/reservation/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-registry/service-registry/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/staff/StaffClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/controller/staff/StaffClubController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/repository/ReservationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/implementation/staff/StaffClubServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/implementation/staff/StaffClubServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/interfaces/staff/StaffClubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reservation/reservation/src/main/java/com/reservation/reservation/service/interfaces/staff/StaffClubService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/config/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/dto/user/UserCreatedDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/dto/user/UserCreatedDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/dto/user/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/dto/user/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/entity/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/entity/enums/RoleEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/com/user_service/user/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/user/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +127,7 @@
       <workItem from="1742423735744" duration="342000" />
       <workItem from="1742424105250" duration="296000" />
       <workItem from="1742424587048" duration="14106000" />
-      <workItem from="1742895808031" duration="325000" />
+      <workItem from="1742895808031" duration="633000" />
     </task>
     <servers />
   </component>
