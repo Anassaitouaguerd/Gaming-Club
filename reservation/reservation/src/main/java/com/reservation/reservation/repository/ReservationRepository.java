@@ -39,4 +39,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("SELECT r FROM Reservation r WHERE r.club.id IN :clubIds ORDER BY r.startTime DESC")
     List<Reservation> findByClubIdIn(@Param("clubIds") List<Long> clubIds);
+
+    // Here's a possible JPA query implementation
+    @Query("SELECT r FROM Reservation r WHERE r.club.id = :clubId AND r.status = 'ACTIVE' AND r.endTime > CURRENT_TIMESTAMP")
+    List<Reservation> findActiveReservationsForClub(@Param("clubId") Long clubId);
 }

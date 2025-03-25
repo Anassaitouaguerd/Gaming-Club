@@ -38,6 +38,9 @@
                             .requestMatchers("/reservation/all").permitAll()
                             .requestMatchers("/staff/clubs/**").permitAll()
                             .requestMatchers("/staff/clubs/all").permitAll()
+                            .requestMatchers("/staff/clubs/create").permitAll()
+                            .requestMatchers("/staff/clubs/update/**").permitAll()
+                            .requestMatchers("/staff/clubs/delete/**").permitAll()
                             .requestMatchers("/staff/clubs/all/reservations").permitAll()
                             .requestMatchers("/staff/clubs/club/**").permitAll()
 

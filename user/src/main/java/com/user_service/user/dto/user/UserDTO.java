@@ -1,6 +1,6 @@
 package com.user_service.user.dto.user;
 
-import com.user_service.user.entity.enums.Role;
+import com.user_service.user.entity.enums.RoleEnum;
 
 public record UserDTO(
         Long id,
@@ -8,5 +8,5 @@ public record UserDTO(
         String email,
         String firstName,
         String lastName,
-        Role role,
+        RoleEnum role,
         String phoneNumber){}

@@ -4,6 +4,7 @@ import com.user_service.user.dto.user.UserCreatedDTO;
 import com.user_service.user.dto.user.UserDTO;
 import com.user_service.user.entity.Role;
 import com.user_service.user.entity.User;
+import com.user_service.user.entity.enums.RoleEnum;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +26,7 @@ public class UserMapper {
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
-                roleName != null ? com.user_service.user.entity.enums.Role.valueOf(roleName) : null,
+                roleName != null ? RoleEnum.valueOf(roleName) : null,
                 user.getPhoneNumber()
         );
     }

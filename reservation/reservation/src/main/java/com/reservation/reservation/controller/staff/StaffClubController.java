@@ -4,11 +4,9 @@ import com.reservation.reservation.dto.staff.ClubStaffDTO;
 import com.reservation.reservation.dto.staff.ReservationStaffDTO;
 import com.reservation.reservation.service.interfaces.staff.StaffClubService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,25 @@ public class StaffClubController {
     public ResponseEntity<List<ReservationStaffDTO>> getReservationsByClub(@PathVariable Long clubId) {
         List<ReservationStaffDTO> reservations = staffClubService.getReservationsByClub(clubId);
         return ResponseEntity.ok(reservations);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<ClubStaffDTO> createClub(@RequestBody ClubStaffDTO clubDTO) {
+        ClubStaffDTO createdClub = staffClubService.createClub(clubDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdClub);
+    }
+
+    @PutMapping("/update/{clubId}")
+    public ResponseEntity<ClubStaffDTO> updateClub(
+            @PathVariable Long clubId,
+            @RequestBody ClubStaffDTO clubDTO) {
+        ClubStaffDTO updatedClub = staffClubService.updateClub(clubId, clubDTO);
+        return ResponseEntity.ok(updatedClub);
+    }
+
+    @DeleteMapping("/delete/{clubId}")
+    public ResponseEntity<Void> deleteClub(@PathVariable Long clubId) {
+        staffClubService.deleteClub(clubId);
+        return ResponseEntity.noContent().build();
     }
 }

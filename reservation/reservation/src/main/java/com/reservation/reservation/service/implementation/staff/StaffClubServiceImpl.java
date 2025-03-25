@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +38,6 @@ public class StaffClubServiceImpl implements StaffClubService {
                     .map(UserDto::getId)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // Change here: Get Club entities from repository and convert to DTOs
             List<Club> clubs = clubRepository.findClubsByStaffId(userId);
             return clubs.stream()
                     .map(this::convertToClubDTO)
@@ -49,33 +49,27 @@ public class StaffClubServiceImpl implements StaffClubService {
 
     @Override
     public List<ReservationStaffDTO> getReservationsByStaffClubs() {
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
             String username = userDetails.getUsername();
 
-            // Get the user ID from the User Service
             Long userId = userServiceClient.findByUsername(username)
                     .map(UserDto::getId)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // Fetch clubs associated with this user ID
             List<Club> staffClubs = clubRepository.findClubsByStaffId(userId);
 
             if (staffClubs.isEmpty()) {
                 return new ArrayList<>();
             }
 
-            // Get all club IDs
             List<Long> clubIds = staffClubs.stream()
                     .map(Club::getId)
                     .collect(Collectors.toList());
 
-            // Fetch reservations for these clubs
             List<Reservation> reservations = reservationRepository.findByClubIdIn(clubIds);
 
-            // Convert to DTOs
             return reservations.stream()
                     .map(this::convertToDTO)
                     .collect(Collectors.toList());
@@ -86,27 +80,22 @@ public class StaffClubServiceImpl implements StaffClubService {
 
     @Override
     public List<ReservationStaffDTO> getReservationsByClub(Long clubId) {
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
             String username = userDetails.getUsername();
 
-            // Get the user ID from the User Service
             Long userId = userServiceClient.findByUsername(username)
                     .map(UserDto::getId)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // Verify the club belongs to this staff member
             boolean hasAccess = clubRepository.checkClubBelongsToStaff(clubId, userId);
             if (!hasAccess) {
                 throw new RuntimeException("Unauthorized access to club");
             }
 
-            // Fetch reservations for this club
             List<Reservation> reservations = reservationRepository.findByClubId(clubId);
 
-            // Convert to DTOs
             return reservations.stream()
                     .map(this::convertToDTO)
                     .collect(Collectors.toList());
@@ -115,7 +104,6 @@ public class StaffClubServiceImpl implements StaffClubService {
         throw new RuntimeException("Not authenticated");
     }
 
-    // Helper method to convert Reservation entity to DTO
     private ReservationStaffDTO convertToDTO(Reservation reservation) {
         return ReservationStaffDTO.builder()
                 .id(reservation.getId())
@@ -130,7 +118,6 @@ public class StaffClubServiceImpl implements StaffClubService {
                 .build();
     }
 
-    // Helper method to convert Club entity to ClubDTO
     private ClubStaffDTO convertToClubDTO(Club club) {
         return new ClubStaffDTO(
                 club.getId(),
@@ -144,5 +131,100 @@ public class StaffClubServiceImpl implements StaffClubService {
                 club.getCreatedAt(),
                 club.getUpdatedAt()
         );
+    }
+
+    @Override
+    public ClubStaffDTO createClub(ClubStaffDTO clubDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+
+            Long userId = userServiceClient.findByUsername(username)
+                    .map(UserDto::getId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            Club club = new Club();
+            club.setName(clubDTO.name());
+            club.setAddress(clubDTO.address());
+            club.setCity(clubDTO.city());
+            club.setDescription(clubDTO.description());
+            club.setContactInfo(clubDTO.contactInfo());
+            club.setAdmin(userId);
+            club.setApproved(false);
+            club.setCreatedAt(LocalDateTime.now());
+            club.setUpdatedAt(LocalDateTime.now());
+
+            Club savedClub = clubRepository.save(club);
+
+            return convertToClubDTO(savedClub);
+        }
+
+        throw new RuntimeException("Not authenticated");
+    }
+
+    @Override
+    public ClubStaffDTO updateClub(Long clubId, ClubStaffDTO clubDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+
+            Long userId = userServiceClient.findByUsername(username)
+                    .map(UserDto::getId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            Club club = clubRepository.findById(clubId)
+                    .orElseThrow(() -> new RuntimeException("Club not found"));
+
+            boolean hasAccess = club.getAdmin().equals(userId) ||
+                    clubRepository.checkClubBelongsToStaff(clubId, userId);
+
+            if (!hasAccess) {
+                throw new RuntimeException("Unauthorized access to club");
+            }
+
+            club.setName(clubDTO.name());
+            club.setAddress(clubDTO.address());
+            club.setCity(clubDTO.city());
+            club.setDescription(clubDTO.description());
+            club.setContactInfo(clubDTO.contactInfo());
+            club.setUpdatedAt(LocalDateTime.now());
+
+            Club updatedClub = clubRepository.save(club);
+
+            return convertToClubDTO(updatedClub);
+        }
+
+        throw new RuntimeException("Not authenticated");
+    }
+
+    @Override
+    public void deleteClub(Long clubId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+
+            Long userId = userServiceClient.findByUsername(username)
+                    .map(UserDto::getId)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            Club club = clubRepository.findById(clubId)
+                    .orElseThrow(() -> new RuntimeException("Club not found"));
+
+            if (!club.getAdmin().equals(userId)) {
+                throw new RuntimeException("Only the club admin can delete the club");
+            }
+
+            List<Reservation> activeReservations = reservationRepository.findActiveReservationsForClub(clubId);
+            if (!activeReservations.isEmpty()) {
+                throw new RuntimeException("Cannot delete club with active reservations");
+            }
+            
+            clubRepository.deleteById(clubId);
+        } else {
+            throw new RuntimeException("Not authenticated");
+        }
     }
 }

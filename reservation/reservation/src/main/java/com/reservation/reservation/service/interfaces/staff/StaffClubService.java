@@ -9,4 +9,7 @@ public interface StaffClubService {
     List<ClubStaffDTO> getClubByStaff();
     List<ReservationStaffDTO> getReservationsByStaffClubs();
     List<ReservationStaffDTO> getReservationsByClub(Long clubId);
+    ClubStaffDTO createClub(ClubStaffDTO clubDTO);
+    ClubStaffDTO updateClub(Long clubId, ClubStaffDTO clubDTO);
+    void deleteClub(Long clubId);
 }

@@ -132,7 +132,27 @@ spring:
             - Path=/reservation-service/staff/clubs/all
           filters:
             - SetPath=/staff/clubs/all
-            # Authorization header is preserved for staff endpoints
+
+        - id: staff-clubs-create
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs/create
+          filters:
+            - SetPath=/staff/clubs/create
+
+        - id: staff-clubs-update
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs/update/**
+          filters:
+            - RewritePath=/reservation-service/staff/clubs/update/(?<segment>.*), /staff/clubs/update/${segment}
+
+        - id: staff-clubs-delete
+          uri: lb://reservation-service
+          predicates:
+            - Path=/reservation-service/staff/clubs/delete/**
+          filters:
+            - RewritePath=/reservation-service/staff/clubs/delete/(?<segment>.*), /staff/clubs/delete/${segment}
 
         - id: staff-clubs-all-reservations
           uri: lb://reservation-service
